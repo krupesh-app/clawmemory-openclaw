@@ -1,0 +1,75 @@
+{
+  "id": "clawmemory",
+  "kind": "memory",
+  "name": "ClawMemory",
+  "description": "Cloud-based semantic memory for AI agents. Store, recall, and forget — in milliseconds.",
+  "version": "0.1.0",
+  "uiHints": {
+    "apiKey": {
+      "label": "ClawMemory API Key",
+      "sensitive": true,
+      "placeholder": "cm_...",
+      "help": "Get your API key at clawmemory.vercel.app/dashboard"
+    },
+    "agentId": {
+      "label": "Agent ID",
+      "placeholder": "jarvis",
+      "help": "Optional identifier for multi-agent setups"
+    },
+    "autoRecall": {
+      "label": "Auto-Recall",
+      "help": "Automatically inject relevant memories into context before each response"
+    },
+    "autoCapture": {
+      "label": "Auto-Capture",
+      "help": "Automatically store important information from conversations"
+    },
+    "recallLimit": {
+      "label": "Recall Limit",
+      "placeholder": "5",
+      "help": "Maximum memories to inject (default: 5)",
+      "advanced": true
+    },
+    "recallThreshold": {
+      "label": "Recall Threshold",
+      "placeholder": "0.3",
+      "help": "Minimum relevance score for recall (0-1, default: 0.3)",
+      "advanced": true
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "description": "ClawMemory API key (cm_...)"
+      },
+      "agentId": {
+        "type": "string",
+        "description": "Agent identifier for multi-agent setups"
+      },
+      "autoRecall": {
+        "type": "boolean",
+        "default": true,
+        "description": "Auto-inject relevant memories before responses"
+      },
+      "autoCapture": {
+        "type": "boolean",
+        "default": true,
+        "description": "Auto-store important information after responses"
+      },
+      "recallLimit": {
+        "type": "number",
+        "default": 5,
+        "description": "Max memories to recall"
+      },
+      "recallThreshold": {
+        "type": "number",
+        "default": 0.3,
+        "description": "Min relevance score (0-1)"
+      }
+    },
+    "required": ["apiKey"]
+  }
+}

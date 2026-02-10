@@ -1,0 +1,41 @@
+{
+  "name": "@clawmemory/openclaw",
+  "version": "0.1.0",
+  "description": "ClawMemory plugin for OpenClaw - cloud-based semantic memory for AI agents",
+  "main": "index.ts",
+  "type": "module",
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "memory",
+    "ai",
+    "agents",
+    "semantic-search",
+    "vector-database",
+    "clawmemory"
+  ],
+  "author": "ClawMemory <krupesh@startupyaan.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clawmemory/openclaw-plugin.git"
+  },
+  "homepage": "https://clawmemory.vercel.app",
+  "bugs": {
+    "url": "https://github.com/clawmemory/openclaw-plugin/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "index.ts",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.1.0"
+  }
+}
