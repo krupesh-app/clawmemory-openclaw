@@ -1,6 +1,6 @@
 {
-  "name": "@clawmemory/openclaw",
-  "version": "0.1.0",
+  "name": "clawmemory-openclaw",
+  "version": "0.1.1",
   "description": "ClawMemory plugin for OpenClaw - cloud-based semantic memory for AI agents",
   "main": "index.ts",
   "type": "module",
@@ -33,7 +33,9 @@
     "README.md"
   ],
   "openclaw": {
-    "extensions": ["./index.ts"]
+    "extensions": [
+      "./index.ts"
+    ]
   },
   "peerDependencies": {
     "openclaw": ">=2026.1.0"
