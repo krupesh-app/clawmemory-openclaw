@@ -9,7 +9,7 @@
       "label": "ClawMemory API Key",
       "sensitive": true,
       "placeholder": "cm_...",
-      "help": "Get your API key at clawmemory.vercel.app/dashboard"
+      "help": "Get your API key at clawmemory.dev/dashboard"
     },
     "agentId": {
       "label": "Agent ID",

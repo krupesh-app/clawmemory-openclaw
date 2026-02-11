@@ -4,7 +4,7 @@
  * Cloud-based semantic memory for AI agents.
  * Provides auto-recall and auto-capture via OpenClaw lifecycle hooks.
  *
- * @see https://clawmemory.vercel.app
+ * @see https://clawmemory.dev
  */
 
 import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
@@ -56,7 +56,7 @@ interface StoreResponse {
 // ClawMemory API Client
 // ============================================================================
 
-const API_BASE = "https://clawmemory.vercel.app/api";
+const API_BASE = "https://clawmemory.dev/api";
 
 class ClawMemoryClient {
   constructor(
@@ -195,7 +195,7 @@ export default function clawmemoryPlugin(api: OpenClawPluginApi) {
 
   // Validate API key
   if (!cfg.apiKey || !cfg.apiKey.startsWith("cm_")) {
-    api.logger.error("clawmemory: Invalid API key. Get one at clawmemory.vercel.app/dashboard");
+    api.logger.error("clawmemory: Invalid API key. Get one at clawmemory.dev/dashboard");
     return;
   }
 

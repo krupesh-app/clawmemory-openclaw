@@ -5,27 +5,22 @@ Cloud-based semantic memory for AI agents. Give your OpenClaw agent perfect memo
 ## Installation
 
 ```bash
-openclaw plugins install @clawmemory/openclaw
+openclaw plugins install clawmemory-openclaw
 ```
 
-## Configuration
+## Quick Start
 
-1. Get your API key at [clawmemory.vercel.app/dashboard](https://clawmemory.vercel.app/dashboard)
+1. Get your API key at [clawmemory.dev/dashboard](https://clawmemory.dev/dashboard)
 
 2. Add to your `openclaw.json`:
 
 ```json
 {
   "plugins": {
-    "slots": {
-      "memory": "clawmemory"
-    },
     "entries": {
       "clawmemory": {
-        "enabled": true,
         "config": {
           "apiKey": "cm_your_api_key",
-          "agentId": "jarvis",
           "autoRecall": true,
           "autoCapture": true
         }
@@ -35,21 +30,13 @@ openclaw plugins install @clawmemory/openclaw
 }
 ```
 
-3. Restart the Gateway
+3. Restart OpenClaw — that's it!
 
 ## Features
 
 ### Auto-Recall
 
 When enabled, relevant memories are automatically injected into your agent's context before each response. Your agent will "remember" past conversations, preferences, and decisions.
-
-```json
-{
-  "autoRecall": true,
-  "recallLimit": 5,
-  "recallThreshold": 0.3
-}
-```
 
 ### Auto-Capture
 
@@ -60,12 +47,6 @@ When enabled, the plugin automatically detects and stores important information 
 - Facts ("My name is Alex")
 - Tasks ("Remember to deploy tomorrow")
 - Events ("Deployed v1.2 to production")
-
-```json
-{
-  "autoCapture": true
-}
-```
 
 ### Manual Tools
 
@@ -89,11 +70,32 @@ openclaw clawmemory store "User prefers concise responses" --type preference
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `apiKey` | string | required | Your ClawMemory API key |
-| `agentId` | string | null | Agent identifier for multi-agent setups |
 | `autoRecall` | boolean | true | Auto-inject relevant memories |
 | `autoCapture` | boolean | true | Auto-store important info |
+| `agentId` | string | - | Agent identifier (multi-agent setups) |
 | `recallLimit` | number | 5 | Max memories to recall |
 | `recallThreshold` | number | 0.3 | Min relevance score (0-1) |
+
+### Advanced Config Example
+
+```json
+{
+  "plugins": {
+    "entries": {
+      "clawmemory": {
+        "config": {
+          "apiKey": "cm_your_api_key",
+          "agentId": "jarvis",
+          "autoRecall": true,
+          "autoCapture": true,
+          "recallLimit": 10,
+          "recallThreshold": 0.4
+        }
+      }
+    }
+  }
+}
+```
 
 ## How It Works
 
@@ -112,9 +114,9 @@ openclaw clawmemory store "User prefers concise responses" --type preference
 
 ## Links
 
-- [ClawMemory Dashboard](https://clawmemory.vercel.app/dashboard)
-- [API Documentation](https://clawmemory.vercel.app/docs)
-- [GitHub](https://github.com/clawmemory/openclaw-plugin)
+- [ClawMemory Dashboard](https://clawmemory.dev/dashboard)
+- [API Documentation](https://clawmemory.dev/docs)
+- [GitHub](https://github.com/krupesh-app/clawmemory-openclaw)
 
 ## License
 
