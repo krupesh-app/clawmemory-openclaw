@@ -131,7 +131,7 @@ const CAPTURE_PATTERNS = [
   { pattern: /\b(?:my name is|i'?m called|call me)\s+(\w+)/i, type: "fact" as const },
   { pattern: /\b(?:i prefer|i like|i want|i need)\b/i, type: "preference" as const },
   { pattern: /\b(?:we decided|decision:|let'?s go with|we'?ll use)\b/i, type: "decision" as const },
-  { pattern: /\b(?:remember that|don'?t forget|important:)\b/i, type: "fact" as const },
+  { pattern: /\b(?:remember|don'?t forget|important:)\b/i, type: "fact" as const },
   { pattern: /\b(?:todo:|task:|action item:)\b/i, type: "task" as const },
   { pattern: /\b(?:deployed|launched|shipped|released|published)\b/i, type: "event" as const },
 ];
