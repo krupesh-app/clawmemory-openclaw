@@ -56,7 +56,7 @@ interface StoreResponse {
 // ClawMemory API Client
 // ============================================================================
 
-const API_BASE = "https://clawmemory.dev/api";
+const API_BASE = "https://www.clawmemory.dev/api";
 
 class ClawMemoryClient {
   constructor(
