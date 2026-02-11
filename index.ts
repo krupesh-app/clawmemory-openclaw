@@ -191,7 +191,7 @@ function extractImportantContent(messages: unknown[]): Array<{ content: string; 
 // ============================================================================
 
 export default function clawmemoryPlugin(api: OpenClawPluginApi) {
-  const cfg = api.config as ClawMemoryConfig;
+  const cfg = (api.pluginConfig ?? {}) as ClawMemoryConfig;
 
   // Validate API key
   if (!cfg.apiKey || !cfg.apiKey.startsWith("cm_")) {
