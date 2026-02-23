@@ -1,6 +1,6 @@
 {
   "name": "clawmemory-openclaw",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "ClawMemory plugin for OpenClaw - cloud-based semantic memory for AI agents",
   "main": "index.ts",
   "type": "module",

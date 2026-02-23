@@ -1,28 +1,30 @@
-# ClawMemory for OpenClaw
+# ClawMemory Plugin for OpenClaw
 
-Cloud-based semantic memory for AI agents. Give your OpenClaw agent perfect memory with one command.
+Cloud-based semantic memory for AI agents. Auto-recall relevant context, auto-capture important facts, and search by meaning.
 
-## Installation
+**Website:** https://clawmemory.dev
+
+## Install
 
 ```bash
 openclaw plugins install clawmemory-openclaw
 ```
 
-## Quick Start
+Restart OpenClaw after installing.
+
+## Setup
 
 1. Get your API key at [clawmemory.dev/dashboard](https://clawmemory.dev/dashboard)
-
-2. Add to your `openclaw.json`:
+2. Add to your `~/.openclaw/openclaw.json`:
 
 ```json
 {
   "plugins": {
     "entries": {
-      "clawmemory": {
+      "clawmemory-openclaw": {
+        "enabled": true,
         "config": {
-          "apiKey": "cm_your_api_key",
-          "autoRecall": true,
-          "autoCapture": true
+          "apiKey": "cm_your_api_key"
         }
       }
     }
@@ -30,66 +32,47 @@ openclaw plugins install clawmemory-openclaw
 }
 ```
 
-3. Restart OpenClaw — that's it!
+3. Restart OpenClaw. Done!
 
 ## Features
 
-### Auto-Recall
+| Feature | Description |
+|---------|-------------|
+| **Auto-Recall** | Injects relevant memories before every AI turn |
+| **Auto-Capture** | Stores important facts after every turn |
+| **Semantic Search** | Find memories by meaning, not keywords |
+| **Profile Injection** | Optionally inject full profile every N turns |
 
-When enabled, relevant memories are automatically injected into your agent's context before each response. Your agent will "remember" past conversations, preferences, and decisions.
-
-### Auto-Capture
-
-When enabled, the plugin automatically detects and stores important information from conversations:
-
-- User preferences ("I prefer dark mode")
-- Decisions ("We decided to use React")
-- Facts ("My name is Alex")
-- Tasks ("Remember to deploy tomorrow")
-- Events ("Deployed v1.2 to production")
-
-### Manual Tools
-
-Your agent also gets two tools for manual memory management:
-
-- `memory_store` - Store a specific memory
-- `memory_recall` - Search for relevant memories
-
-### CLI Commands
-
-```bash
-# Search memories
-openclaw clawmemory recall "user preferences"
-
-# Store a memory
-openclaw clawmemory store "User prefers concise responses" --type preference
-```
-
-## Configuration Options
+## Configuration
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `apiKey` | string | required | Your ClawMemory API key |
-| `autoRecall` | boolean | true | Auto-inject relevant memories |
-| `autoCapture` | boolean | true | Auto-store important info |
-| `agentId` | string | - | Agent identifier (multi-agent setups) |
-| `recallLimit` | number | 5 | Max memories to recall |
-| `recallThreshold` | number | 0.3 | Min relevance score (0-1) |
+| `apiKey` | string | — | Your ClawMemory API key (required) |
+| `agentId` | string | — | Identifier for this agent |
+| `autoRecall` | boolean | `true` | Inject relevant memories before turns |
+| `autoCapture` | boolean | `true` | Store important facts after turns |
+| `recallLimit` | number | `5` | Max memories to inject per turn |
+| `recallThreshold` | number | `0.3` | Min relevance score (0-1) |
+| `profileFrequency` | number | `0` | Inject full profile every N turns (0=disabled) |
+| `debug` | boolean | `false` | Enable verbose logging |
 
-### Advanced Config Example
+### Full Example
 
 ```json
 {
   "plugins": {
     "entries": {
-      "clawmemory": {
+      "clawmemory-openclaw": {
+        "enabled": true,
         "config": {
           "apiKey": "cm_your_api_key",
           "agentId": "jarvis",
           "autoRecall": true,
           "autoCapture": true,
           "recallLimit": 10,
-          "recallThreshold": 0.4
+          "recallThreshold": 0.3,
+          "profileFrequency": 50,
+          "debug": false
         }
       }
     }
@@ -97,26 +80,66 @@ openclaw clawmemory store "User prefers concise responses" --type preference
 }
 ```
 
+## AI Tools
+
+The plugin registers these tools for the AI to use:
+
+| Tool | Description |
+|------|-------------|
+| `memory_store` | Store information in long-term memory |
+| `memory_recall` | Search memories by semantic query |
+| `memory_forget` | Delete memories by query or ID |
+
+## CLI Commands
+
+```bash
+# Check connection status
+openclaw clawmemory status
+
+# Search memories
+openclaw clawmemory recall "project deadlines"
+
+# Store a memory
+openclaw clawmemory store "User prefers dark mode" --type preference
+
+# List recent memories
+openclaw clawmemory list --limit 20
+
+# Delete memories matching query
+openclaw clawmemory forget "old project"
+
+# Delete ALL memories (careful!)
+openclaw clawmemory wipe --confirm
+```
+
 ## How It Works
 
-1. **Before each response**: ClawMemory searches for memories relevant to the user's message and injects them into the agent's context.
+### Auto-Recall
+Before every AI turn, the plugin:
+1. Takes the user's message as a query
+2. Searches ClawMemory for relevant memories
+3. Injects them as context: `<clawmemory-context>...</clawmemory-context>`
 
-2. **After each response**: ClawMemory analyzes the conversation for important information (preferences, decisions, facts) and stores them automatically.
+### Auto-Capture
+After every AI turn, the plugin:
+1. Scans for important patterns (preferences, decisions, tasks, etc.)
+2. Extracts and stores them in ClawMemory
 
-3. **Semantic search**: Unlike keyword search, ClawMemory understands meaning. "What color does the user like?" will find "I prefer dark themes."
+### Profile Injection
+When `profileFrequency` is set, every N turns the plugin injects your most recent memories as a "profile" — even if they don't match the current query.
 
-## Privacy
+## Pricing
 
-- All memories are stored in your ClawMemory account
-- Memories are isolated per API key
-- Use `agentId` to separate memories between agents
-- Delete memories anytime via dashboard or API
+- **$12/month** — 5,000 memories, unlimited recalls
+- **7-day free trial** — No credit card required
 
-## Links
+Get started at [clawmemory.dev](https://clawmemory.dev)
 
-- [ClawMemory Dashboard](https://clawmemory.dev/dashboard)
-- [API Documentation](https://clawmemory.dev/docs)
-- [GitHub](https://github.com/krupesh-app/clawmemory-openclaw)
+## Support
+
+- Website: https://clawmemory.dev
+- Email: support@clawmemory.dev
+- GitHub: https://github.com/krupesh-app/clawmemory
 
 ## License
 
